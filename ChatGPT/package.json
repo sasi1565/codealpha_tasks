@@ -1,0 +1,17 @@
+{
+  "name": "chatgpt",
+  "version": "1.0.0",
+  "description": "chatapp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.1",
+    "openai": "^4.0.0",
+    "socket.io": "^4.7.5"
+  }
+}

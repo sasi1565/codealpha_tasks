@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial;
+        }
+
+        body {
+            /* background-image: linear-gradient(to bottom, c, grey);
+            height: 100vh;*/
+            background-color: #08335e;
+        }
+
+        .navbar {
+            position: relative;
+            height: 70px;
+            background-color: #001f3f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-section {
+            height: 60px;
+        }
+
+        .nav-section ul {
+            display: flex;
+        }
+
+        .nav-section ul li {
+            list-style: none;
+            margin: 15px 20px;
+        }
+
+        .nav-section ul li a {
+            text-decoration: none;
+            align-items: center;
+            color: #6c757d;
+
+        }
+        #download{
+            transition: 0.5s;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        .nav-section ul li a:hover,
+        #download:hover {
+            color: white;
+            border: #5bc0de solid 1px;
+        }
+
+        .home {
+            height: 70vh;
+            display: flex;
+            margin: 20px auto;
+            background-color: #001f3f;
+            width: 90%;
+            border-radius: 20px;
+        }
+
+        .home .first-part {
+            height: 65vh;
+            font-size: 60px;
+            font-weight: 550;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+
+        }
+
+        .home .second-part {
+            height: 65vh;
+            font-size: 60px;
+            font-weight: 550;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        #download {
+            position: absolute;
+            right: 5%;
+            top: 25%;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .education {
+            /*height: 60vh;*/
+            margin: 20px auto;
+            background-color: #001f3f;
+            width: 90%;
+            border-radius: 20px;
+        }
+
+        .education ul {
+            margin-left: 40px;
+            color: white;
+            font-size: 2.1vw;
+        }
+        .education ul li{
+            margin: 20px 0px;
+        }
+        .title {
+            color: white;
+            font-size: 2.7vw;
+            padding: 20px 0 20px 30px;
+            font-weight: 500;
+            display: block;
+        }
+
+        .education .title::after,.certifications .title::after{
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #5bc0de;
+            transition: width 0.3s;
+        }
+
+        .education .details {
+            position: relative;
+        }
+
+        .education .details-1 {
+            position: relative;
+            font-size: 55px;
+            font-weight: 550;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0px 10px;
+            width: 95%;
+        }
+
+        .education .details-1 .clg {
+            color: white;
+            font-size: 1.9vw; /*30px*/
+            font-weight: 500;
+        }
+
+        .education .details-1 .spec {
+            color:#6c757d;
+            font-size:1.2vw; /*15px*/
+            font-weight: 500;
+        }
+        .education .details-1 .grade {
+            color: white;
+            font-size: 1.5vw; /*20px*/
+            font-weight: 500;
+        }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            transition: 1.0s ease-in-out;
+            
+        }
+        
+        .popup-content {
+            position: relative;
+            width: 900px;
+            height: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .popup img {
+            width: 100%;
+            height: 100%;
+            object-fit:contain;
+            transition: 1.0s ease-in-out;
+        }
+        
+        .close {
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        .blurred-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+        }        
+        hr {
+            width: 97%; 
+            border: none; 
+            height: 2px; 
+            background-color: #6c757d;
+        }
+        .popup-button {
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #6c757d;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.4s ease;
+        }
+        
+        .popup-button:hover {
+            color: white;
+            border: #5bc0de solid 1px;
+        }
+        .skills title{
+            text-align: center;
+        }
+        .skills .category {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            border: #5bc0de solid 1px;
+            border-radius: 20px;
+            justify-content: space-evenly;
+            padding: 0px 0px;
+            margin-left: 50px;
+        }
+        .skills .category .skill {
+            width: 100px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .skills .category .skill img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .skills .category .skill .image-name {
+            padding: 10px 0;
+            background-color: #f2f2f2;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .sk-title {
+            color: white;
+            font-size: 30px;
+            padding: 20px 0 20px 30px;
+            font-weight: 500;
+            display: block;
+        }
+        .card2 {
+            display: flex;
+            border: #5bc0de solid 1px;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 200px;
+            width: 95%;
+            margin-left: 2% ;
+            margin-bottom: 10px;
+        }
+        
+        .card2 .image-container {
+            flex: 0 0 auto;
+            width: 200px;
+            position: relative;
+        }
+        
+        .card2 .image-container img {
+            width: 100%;
+            height: inherit; /* Image height inherits from the parent */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+        
+        .card2 .description {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .card2 .description h2 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .card2 .description p {
+            color: white;
+            margin: 0;
+        }
+
+        .card2 .description h3 a{
+            text-decoration: none;
+            color:#6c757d;
+        }
+        .card2 .description h3{
+            color: #5bc0de;
+            margin-bottom: 5px;
+
+        }
+        .footer {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px 0;
+        }
+        .footer .contact{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer .contact .social-links{
+            width: 34%;
+            display: flex;
+            justify-content: center;
+        }
+        .footer .contact .contact-me{
+            width: 34%;
+        }
+        .footer .contact .social-links .social{
+            width: 50%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .footer .contact .contact-me{
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footer .contact .social-links .social a{
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 30px;
+            transition: 0.5s;
+        }
+        .footer .contact .social-links .social a:hover{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="navbar">
+                <div class="nav-section">
+                    <!--<ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Skills</a></li>
+                        <li><a href="#">Tech Stack</a></li>
+                        <li><a href="#">Projects</a></li>
+                    </ul>-->
+                    <a href="Resume.pdf" id="download" title="click here to download my resume"
+                        download="SasiResume.pdf">
+                        Resume Download
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <img id="popupImage" src="" alt="Popup Image">
+            </div>
+        </div>
+        <div class="home">
+            <div class="first-part">
+                <p style="color: white;">Hi, I'm <span style="color: #5bc0de ;"><br />Sasi Kiran</span></p>
+            </div>
+            <div class="second-part">
+                <img src="img.png" alt="image" style="height: 400px; width: 400px;">
+            </div>
+        </div>
+        <div class="education">
+            <div style="margin-left: 20px; padding-bottom:15px">
+                <div class="title">Education Details</div>
+                <ul>
+                    <div class="details">
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Sri Vasavi Engineering College <span style="color:#6c757d;font-size:1.5vw">(2021-Present)</span></p>
+                                    <p class="spec">B.Tech (Computer Science and Engineering)</p>
+                                </div>
+                                <div>
+                                    <p class="grade">Grade:<span style="color: #6c757d;"> 8.5 CGPA</span></p>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Narayana Junior College <span style="color:#6c757d;font-size:1.5vw">(2019-2021)</span></p>
+                                    <p class="spec">Intermediate (M.P.C)</p>
+                                </div>
+                                <div>
+                                    <p class="grade">Grade:<span style="color: #6c757d;"> 92.3%</span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Ravindra Bharathi School <span style="color:#6c757d;font-size:1.5vw">(2018-2019)</span></p>
+                                    <p class="spec">SSC</p>
+                                </div>
+                                <div>
+                                    <p class="grade">Grade:<span style="color: #6c757d;"> 9.7 GPA</span></p>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="education">
+            <div style="margin-left: 20px; padding-bottom:15px">
+                <div class="title">Certifications</div>
+                <ul>
+                    <div class="details">
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Programming in JAVA </p>
+                                    <p class="spec">-NPTEL</p>
+                                </div>
+                                <div>
+                                    <button class="openPopup popup-button" data-image="c-2.png">Show Certificate</button>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Crash Course on HTML&CSS</p>
+                                    <p class="spec">-Udemy </p>
+                                </div>
+                                <div>
+                                    <button class="openPopup popup-button" data-image="c-1.png">Show Certificate</button>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">Microsoft Certified: Azure Fundamentals</p>
+                                    <p class="spec">-Microsoft learn </p>
+                                </div>
+                                <div>
+                                    <button class="openPopup popup-button" data-image="c-1.png">Show Certificate</button>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">AWS Academy Cloud Foundations</p>
+                                    <p class="spec">~Amazon Web Services (AWS) </p>
+                                </div>
+                                <div>
+                                    <button class="openPopup popup-button" data-image="fruit-image.jpg">Show Certificate</button>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <div class="details-1">
+                                <div>
+                                    <p class="clg">AWS Academy Cloud Architecting</p>
+                                    <p class="spec">~Amazon Web Services (AWS) </p>
+                                </div>
+                                <div>
+                                    <button class="openPopup popup-button" data-image="fruit-image.jpg">Show Certificate</button>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="education">
+            <div style="margin-left: 20px; padding-bottom:15px">
+                <div class="title">Skills</div>
+                <div class="skills">
+                    <div class="sk-title">Programming</div>
+                    <div  class="category">
+                        
+                        <div class="skill">
+                            <img src="./html5-logo-31813.png" alt="Image">
+                            <div class="image-name">HTML</div>
+                        </div>  
+                        <div class="skill">
+                            <img src="./css-3.png" alt="Image">
+                            <div class="image-name">CSS</div>
+                        </div>    
+                        <div class="skill">
+                            <img src="./js.png" alt="Image">
+                            <div class="image-name">JavaScript</div>
+                        </div> 
+                        <div class="skill">
+                            <img src="./java.png" alt="Image">
+                            <div class="image-name">Java</div>
+                        </div>
+                        <div class="skill">
+                            <img src="./atom.png" alt="Image">
+                            <div class="image-name">React</div>
+                        </div>
+                    </div> 
+                                  
+                </div>
+            </div>
+        </div>
+        <div class="education">
+            <div style="margin-left: 20px; padding-bottom:15px">
+                <div class="title">Achievements</div>
+                <div class="achievement">
+                    <ul>
+                        <li><p style="font-size: 20px;">Published a Journal on Hospital Managent System</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="education">
+            <div style="margin-left: 20px; padding-bottom:15px">
+                <div class="title">Projects</div>
+                <div >
+                    <div class="card2">
+                        <div class="image-container">
+                            <img src="./26996.jpg" alt="Image">
+                        </div>
+                        <div class="description">
+                            <h2>Hospital Management System</h2>
+                            <p>
+                                A Hospital Management System developed with HTML, CSS, JavaScript, and Django framework efficiently manages patient records,
+                                 appointments, staff schedules, and inventory. It ensures seamless communication and organization, enhancing healthcare 
+                                 delivery and administrative processes.
+                            </p>
+                            <h3 class="repo">GitHub Repo Link: <a href="https://github.com/sasi1565/Hospital-Management" target="_blanck">GitHub Link</a></h3>
+                        </div>
+                    </div>
+                    <div class="card2">
+                        <div class="image-container" style="height:200px">
+                            <img src="./shop.png" alt="Image">
+                        </div>
+                        <div class="description">
+                            <h2>Shopping page using React</h2>
+                            <p>
+                                A Shopping page built with React fetches and renders product data from an external API. Users can browse items with ease,
+                                 benefiting from a responsive interface and efficient data retrieval, enhancing their shopping experience.
+                            </p>
+                            <h3 class="repo">GitHub Repo Link: <a href="https://github.com/sasi1565/react-shopping-page" target="_blanck" >GitHub Link</a></h3>
+                        </div>
+                    </div>
+                    <div class="card2">
+                        <div class="image-container">
+                            <img src="./weather.png" alt="Image">
+                        </div>
+                        <div class="description">
+                            <h2>Weather App</h2>
+                            <p>
+                                A weather app designed with simplicity and functionality in mind. It provides real-time weather updates based on location,
+                                 displaying current conditions, temperature, humidity, and forecasts. Users can easily navigate through intuitive UI elements 
+                                 for a seamless experience.
+                            </p>
+                            <h3 class="repo">GitHub Repo Link: <a href="https://github.com/sasi1565/react-weather-app" target="_blanck">GitHub Link</a></h3>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            <div class="footer">
+                <div class="contact">
+                    <div class="social-links">
+                        <div class="social">
+                            <a href=""><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                            <a href="#"><i class="fa-brands fa-github"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></i></a>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content:center;width:34%">
+                        <p><span style="height:100%;"><i class="fa-solid fa-location-dot"></i></i></span> 4-21,Ramalayam Street,Varighedu,West godhavari,Andhra Pradesh</p>
+                    </div>
+                    <div class="contact-me">
+                        <div class="details">
+                            <p><i class="fa-solid fa-at"></i> sasikiran1565@gmail.com</p>
+                            <p><i class="fa-solid fa-phone"></i> 9949976089</p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openPopupButtons = document.querySelectorAll('.openPopup');
+            const popup = document.getElementById('popup');
+            const popupImage = document.getElementById('popupImage');
+            const closePopupButton = document.querySelector('.close');
+            const blurredBackground = document.createElement('div');
+            blurredBackground.classList.add('blurred-background');
+        
+            console.log(openPopupButtons.length);
+        
+            openPopupButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const image = button.getAttribute('data-image');
+                    popupImage.src = image;
+                    popup.style.display = 'block';
+                    document.body.appendChild(blurredBackground);
+                });
+            });
+        
+            closePopupButton.addEventListener('click', () => {
+                popup.style.display = 'none';
+                blurredBackground.remove();
+            });
+        });
+              
+    </script>
+</body>
+
+</html>
